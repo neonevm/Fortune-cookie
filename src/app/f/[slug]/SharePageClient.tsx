@@ -266,7 +266,7 @@ export default function SharePageClient({ fortune }: Props) {
           title="Visit Neon EVM"
         >
           <img 
-            src="/NeonEVM_Pink Sign.png" 
+            src="/NeonEVM_Pink-Sign.png"
             alt="Neon EVM" 
             className="w-full h-full object-contain"
             onError={(e) => {
