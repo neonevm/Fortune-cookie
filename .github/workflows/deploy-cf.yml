@@ -1,0 +1,43 @@
+name: Deploy CF
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  distribute-resources:
+    runs-on: ["gha-runner-scale-set-neonevm"]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build project (Next.js)
+      env:
+        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+        SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        NEXT_PUBLIC_APP_URL: ${{ github.ref == 'refs/heads/main' && 'https://cookie.neonevm.org' || 'https://develop.fortune-cookie.pages.dev' }}
+      run: npm run build
+
+    - name: Generate Cloudflare Pages artifacts (Next on Pages)
+      run: npx --yes @cloudflare/next-on-pages@latest
+
+    - name: Publish to Cloudflare Pages
+      uses: cloudflare/wrangler-action@v3
+      with:
+        apiToken: ${{ secrets.CF_PAGES_TOKEN }}
+        command: |
+          pages deploy ./.vercel/output/static --project-name="fortune-cookie"
