@@ -22,9 +22,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const handle = fortune.handle
   // Use centralized configuration for domain
   const base = getAppUrl()
-  const imageUrl = fortune.image_url.startsWith('http')
-    ? fortune.image_url
-    : new URL(fortune.image_url, base).toString()
+  // Normalize spaces to hyphens to avoid 404s on some hosts/CDNs
+  const normalizedPath = fortune.image_url.replace(/\s/g, '-')
+  const imageUrl = normalizedPath.startsWith('http')
+    ? normalizedPath
+    : new URL(normalizedPath, base).toString()
 
   return {
     title: `@${handle}'s ${app.name}`,

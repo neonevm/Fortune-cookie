@@ -49,6 +49,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Normalize local asset URL to avoid spaces breaking on some CDNs/hosts
+    const normalizedImageUrl = image.url.startsWith('/assets/cookies/')
+      ? image.url.replace(/\s/g, '-')
+      : image.url
+
     // Generate unique slug
     const slug = nanoid(6)
     const shareUrl = `${getAppUrl()}/f/${slug}`
@@ -62,7 +67,7 @@ export async function POST(request: NextRequest) {
       slug,
       handle: normalizedHandle,
       image_id: image.id,
-      image_url: image.url,
+      image_url: normalizedImageUrl,
       ip_hash: ip, // In production, hash this for privacy
       user_agent: userAgent,
       share_url: shareUrl,
@@ -80,7 +85,7 @@ export async function POST(request: NextRequest) {
       shareUrl,
       image: {
         id: image.id,
-        url: image.url,
+        url: normalizedImageUrl,
       },
     })
 
