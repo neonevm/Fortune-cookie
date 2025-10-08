@@ -8,7 +8,7 @@ on:
       - develop
 
 jobs:
-  distribute-resources:
+  build-and-deploy:
     runs-on: ["gha-runner-scale-set-neonevm"]
     
     steps:
