@@ -206,7 +206,7 @@ export default function Home() {
                     console.error('Image failed to load:', fortune.image.url)
                     console.error('Error details:', e)
                     // fallback on the SAME origin as the page
-                    e.currentTarget.src = new URL('/assets/cookies/Fortune Cookie 1.png', window.location.origin).toString()
+                  e.currentTarget.src = new URL('/assets/cookies/Fortune-Cookie-1.png', window.location.origin).toString()
                   }}
                   onLoad={() => {
                     console.log('Image loaded successfully:', fortune.image.url)
