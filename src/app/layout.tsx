@@ -62,8 +62,11 @@ const syne = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Fortune Cookie App",
-  description: "Get your mean crypto fortune",
+  title: "Mean Crypto Fortune Cookie",
+  description: "Get roasted by the crypto gods with your personalized fortune cookie",
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
