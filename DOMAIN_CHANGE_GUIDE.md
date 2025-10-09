@@ -47,7 +47,7 @@ When you change the domain in `config.ts`, these will automatically use the new 
 
 ## Current Configuration
 
-- **Production Domain**: `https://fortune-cookie-umber.vercel.app`
+- **Production Domain**: `https://cookie.neonevm.org`
 - **Development Domain**: `http://localhost:3003`
 - **Auto-detection**: Uses production domain when `NODE_ENV=production`
 

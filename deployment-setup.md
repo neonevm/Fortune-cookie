@@ -13,7 +13,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
 ### Example for Vercel:
 ```bash
-NEXT_PUBLIC_APP_URL=https://fortune-cookie-umber.vercel.app
+NEXT_PUBLIC_APP_URL=https://cookie.neonevm.org
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
@@ -25,11 +25,11 @@ After deployment, you'll need to update existing fortune records to use the prod
 ```sql
 -- Update all existing fortune records to use production domain
 UPDATE public.fortunes 
-SET share_url = REPLACE(share_url, 'http://localhost:3002', 'https://fortune-cookie-umber.vercel.app')
+SET share_url = REPLACE(share_url, 'http://localhost:3002', 'https://cookie.neonevm.org')
 WHERE share_url LIKE '%localhost%';
 
 UPDATE public.fortunes 
-SET share_url = REPLACE(share_url, 'http://localhost:3003', 'https://fortune-cookie-umber.vercel.app')
+SET share_url = REPLACE(share_url, 'http://localhost:3003', 'https://cookie.neonevm.org')
 WHERE share_url LIKE '%localhost%';
 ```
 
