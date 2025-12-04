@@ -49,10 +49,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Normalize local asset URL to avoid spaces breaking on some CDNs/hosts
-    const normalizedImageUrl = image.url.startsWith('/assets/cookies/')
-      ? image.url.replace(/\s/g, '-')
-      : image.url
+    // Keep the original image URL - Next.js will handle URL encoding automatically
+    const normalizedImageUrl = image.url
 
     // Generate unique slug
     const slug = nanoid(6)

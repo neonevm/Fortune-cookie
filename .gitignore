@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+# macOS metadata files
+._*
 
 # debug
 npm-debug.log*
