@@ -115,7 +115,7 @@ export default function SharePageClient({ fortune }: Props) {
     }
   }
 
-  // Use the original image URL - Next.js will handle URL encoding automatically
+  // Build the image URL
   const imageUrl = fortune.image_url.startsWith('http')
     ? fortune.image_url
     : (typeof window !== 'undefined'
@@ -209,7 +209,7 @@ export default function SharePageClient({ fortune }: Props) {
                   console.error('Image failed to load:', imageUrl)
                   console.error('Error details:', e)
                   // fallback on the SAME origin as the page, not 3002
-                  e.currentTarget.src = new URL('/assets/cookies/FCookies - BP 1.jpg', window.location.origin).toString()
+                  e.currentTarget.src = new URL('/assets/cookies/FCookies-BP-1.jpg', window.location.origin).toString()
                 }}
                 onLoad={() => {
                   console.log('Image loaded successfully:', imageUrl)

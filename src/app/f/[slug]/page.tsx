@@ -6,7 +6,7 @@ import { getAppUrl, social, app } from '@/lib/config'
 import SharePageClient from './SharePageClient'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const handle = fortune.handle
   // Use centralized configuration for domain
   const base = getAppUrl()
-  // Use the original image URL - Next.js will handle URL encoding automatically
+  // Build the image URL
   const imageUrl = fortune.image_url.startsWith('http')
     ? fortune.image_url
     : new URL(fortune.image_url, base).toString()
